@@ -41,7 +41,7 @@ public class CalendrierRecette {
             joinColumns = @JoinColumn(name = "id_calendrier"),
             inverseJoinColumns = @JoinColumn(name = "id_recette" ))
     @JsonIgnoreProperties(value = {"calendriers","users"})
-    private Set<Recette> recettes = new HashSet<>();
+    private Set<Recette> recettes = new HashSet<Recette>();
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     @JsonIgnoreProperties(value = {"calendriers"})

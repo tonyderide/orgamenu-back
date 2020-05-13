@@ -34,7 +34,7 @@ public class RecetteService {
 
 
         public List<Recette> findAllByUser() throws Exception {
-                List<Recette> recetteResult = new ArrayList<>();
+                List<Recette> recetteResult = new ArrayList<Recette>();
                 String username = SecurityContextHolder.getContext().getAuthentication().getName();
                 Optional<User> user = userRepository.findByUsername(username);
                 System.out.println("-------------"+username+"------------");

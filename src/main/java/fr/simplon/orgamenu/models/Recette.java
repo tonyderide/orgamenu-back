@@ -41,25 +41,25 @@ public class Recette {
             inverseJoinColumns = @JoinColumn(name = "id_recette"))
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("recettes")
-    private Set<User> users = new HashSet<>();
+    private Set<User> users = new HashSet<User>();
 
     @OneToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "etapes_fk")
-    private List<Etapes> etapes = new ArrayList<>();
+    private List<Etapes> etapes = new ArrayList<Etapes>();
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinTable(name= "programmer",
             joinColumns = @JoinColumn(name = "id_recette"),
             inverseJoinColumns = @JoinColumn(name = "id_calendrier"))
     @JsonIgnoreProperties({"recette"})
-    private Set<CalendrierRecette> calendriers = new HashSet<>();
+    private Set<CalendrierRecette> calendriers = new HashSet<CalendrierRecette>();
 
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinTable(name = "contenir",
             joinColumns = @JoinColumn(name = "id_ingredient"),
             inverseJoinColumns = @JoinColumn(name = "id_recette"))
-    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<Ingredient>();
 
 }
