@@ -2,7 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-   <parent>
+
+       <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.1.8.RELEASE</version>
@@ -14,22 +15,22 @@
     <packaging>jar</packaging>
     <name>orgamenu</name>
     <description>application web d'organisation de menu</description>
-     <scm>
-        <connection>scm:svn:svn://svn.intra-coliposte.fr/CLP_business/CLP_sb-basecamp/trunk</connection>
-        <developerConnection>scm:svn:svn://svn.intra-coliposte.fr/CLP_business/CLP_sb-basecamp/trunk
-        </developerConnection>
-        <url>http://svn.intra-coliposte.fr:9090/websvn/listing.php/?repname=CLP_business</url>
-    </scm>
+<!--     <scm>-->
+<!--        <connection>scm:svn:svn://svn.intra-coliposte.fr/CLP_business/CLP_sb-basecamp/trunk</connection>-->
+<!--        <developerConnection>scm:svn:svn://svn.intra-coliposte.fr/CLP_business/CLP_sb-basecamp/trunk-->
+<!--        </developerConnection>-->
+<!--        <url>http://svn.intra-coliposte.fr:9090/websvn/listing.php/?repname=CLP_business</url>-->
+<!--    </scm>-->
 
-     <properties>
-        <cxf.version>3.3.3</cxf.version>
-        <jackson.version>2.9.8</jackson.version>
-        <springfox-swagger.version>2.9.2</springfox-swagger.version>
-        <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>
-    </properties>
+<!--     <properties>-->
+<!--        <cxf.version>3.3.3</cxf.version>-->
+<!--        <jackson.version>2.9.8</jackson.version>-->
+<!--        <springfox-swagger.version>2.9.2</springfox-swagger.version>-->
+<!--        <java.version>1.8</java.version>-->
+<!--        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>-->
+<!--        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>-->
+<!--        <maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss</maven.build.timestamp.format>-->
+<!--    </properties>-->
 
     <dependencies>
         <!-- web mvc -->
