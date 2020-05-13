@@ -132,7 +132,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>fr.simplon.orgamenu</mainClass>
+                            <mainClass>fr.simplon.orgamenu.OrgamenuApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
