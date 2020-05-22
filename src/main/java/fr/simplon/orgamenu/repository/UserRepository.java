@@ -1,6 +1,6 @@
 package fr.simplon.orgamenu.repository;
 
-import fr.simplon.orgamenu.models.CalendrierRecette;
+import fr.simplon.orgamenu.models.PreferenceAliment;
 import fr.simplon.orgamenu.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +16,10 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     Boolean existsByUsername(String username);
 
     Boolean existsByEmail(String email);
+
+//    @Query("update User.preferenceAliments set User.preferenceAliments= where User.username = :username")
+    User save(User user);
+
 
 
 

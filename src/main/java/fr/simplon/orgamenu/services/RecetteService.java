@@ -1,9 +1,8 @@
 package fr.simplon.orgamenu.services;
 
-import fr.simplon.orgamenu.models.CalendrierRecette;
-import fr.simplon.orgamenu.models.Recette;
-import fr.simplon.orgamenu.models.User;
+import fr.simplon.orgamenu.models.*;
 import fr.simplon.orgamenu.repository.CalendrierRecetteRepository;
+import fr.simplon.orgamenu.repository.PreferenceRepository;
 import fr.simplon.orgamenu.repository.RecetteRepository;
 import fr.simplon.orgamenu.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,41 +14,94 @@ import java.util.*;
 @Service
 public class RecetteService {
 
-        @Autowired
-        private RecetteRepository recetteRepository;
+    @Autowired
+    private RecetteRepository recetteRepository;
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private CalendrierRecetteRepository calendrierRecetteRepository;
+    @Autowired
+    private AllergeneService allergeneService;
+    @Autowired
+    private PreferenceService preferenceService;
 
-        @Autowired
-        private UserRepository userRepository;
+    public List<Recette> findAll() throws Exception {
+        List<Recette> recettes = recetteRepository.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return moinsPreference(moinsAllergene(recettes));
+        } else return recettes;
+    }
 
-        @Autowired
-        private CalendrierRecetteRepository calendrierRecetteRepository;
+    public Recette save(Recette recette) {
+        return recetteRepository.save(recette);
+    }
 
-        public List<Recette> findAll() { return recetteRepository.findAll();}
+    public Optional<Recette> findById(int id) {
+        System.out.println(id);
+        return recetteRepository.findById(id);
+    }
 
-        public Recette save(Recette recette) { return recetteRepository.save(recette);}
-
-        public Optional<Recette> findById(int id) { return recetteRepository.findById(id);}
-
-        public void deleteById(int id) { recetteRepository.deleteById(id); }
+    public void deleteById(int id) {
+        recetteRepository.deleteById(id);
+    }
 
 
-        public List<Recette> findAllByUser() throws Exception {
-                List<Recette> recetteResult = new ArrayList<Recette>();
-                String username = SecurityContextHolder.getContext().getAuthentication().getName();
-                Optional<User> user = userRepository.findByUsername(username);
-                System.out.println("-------------"+username+"------------");
-                if (user.isPresent()) {
-                        Set<CalendrierRecette> calendrierRecettes = calendrierRecetteRepository.findDateByIdUser(user.get().getId());
-                        for (CalendrierRecette i:calendrierRecettes) {
-                                System.out.println("=======>calendrierRecettes:"+i.getDate());
-                                recetteResult.addAll(recetteRepository.findRecetteByCalendriers(i));
+    public List<Recette> findAllByDateUser() throws Exception {
+        List<Recette> recettesResult = new ArrayList<>();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<User> user = userRepository.findByUsername(username);
+        System.out.println("-------------" + username + "------------");
+        if (user.isPresent()) {
+            Set<CalendrierRecette> calendrierRecettes = calendrierRecetteRepository.findDateByIdUser(user.get().getId());
+            for (CalendrierRecette i : calendrierRecettes) {
+                System.out.println("=======>calendrierRecettes:" + i.getDate());
+                recettesResult.addAll(recetteRepository.findRecetteByCalendriers(i));
+            }
+            return moinsAllergene(recettesResult);
+        } else throw new Exception();
+
+    }
+
+
+    //soustrait les recettes avec allergenes
+    public List<Recette> moinsAllergene(List<Recette> recettes) throws Exception {
+        List<Recette> recettesRejected = new ArrayList<>();
+        List<Allergene> allergeneUsers = allergeneService.findAllergeneUser();
+        for (Allergene allergene : allergeneUsers) {
+            for (Recette recette: recettes) {
+                for (Ingredient ingredient : recette.getIngredients()) {
+                    //si allergeneUser n'est pas un allergene de la recette
+                    if ((ingredient.getAllergene()!=allergene.getId())) {
+                        //je l'ajoute a la recette final j'ai la liste des recettes non voulu
+                        if(!recettesRejected.contains(recette)){
+                            recettesRejected.add(recette);
                         }
-                        return recetteResult;
-                        }else throw new Exception();
-
+                    }
+                }
+            }
         }
-
-
+        recettes.removeAll(recettesRejected);
+        return recettes;
+    }
+    //soustrait les recettes sans preferences
+    public List<Recette> moinsPreference(List<Recette> recettes) throws Exception {
+        List<PreferenceAliment>prefUser=preferenceService.findAllUser();
+        List<Recette>recetteRejected=new ArrayList<>();
+        for (Recette recette: recettes) {
+            List<Ingredient>ingredients=recette.getIngredients();
+            for (Ingredient ingredient:ingredients) {
+                for (PreferenceAliment pref:prefUser) {
+                    //si le type de l'ingredient different de la pref alim
+                    if (ingredient.getType() != pref.getIdPreferenceAliment()) {
+                        recetteRejected.add(recette);
+                    }
+                }
+            }
+        }
+        recettes.removeAll(recetteRejected);
+        return recettes;
+    }
 
 }
-

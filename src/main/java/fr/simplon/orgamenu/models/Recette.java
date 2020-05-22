@@ -1,14 +1,10 @@
 package fr.simplon.orgamenu.models;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,12 +18,13 @@ import java.util.Set;
 @RequiredArgsConstructor
 @NoArgsConstructor
 @ToString
-@Table(name="recette")
+@EqualsAndHashCode
+@Table(name = "recette")
 public class Recette {
 
     @Id
     @NonNull
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRecette;
     private String name;
     private int calorie;
@@ -41,25 +38,25 @@ public class Recette {
             inverseJoinColumns = @JoinColumn(name = "id_recette"))
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JsonIgnoreProperties("recettes")
-    private Set<User> users = new HashSet<User>();
+    private Set<User> users = new HashSet<>();
 
     @OneToMany
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "etapes_fk")
-    private List<Etapes> etapes = new ArrayList<Etapes>();
+    @JoinColumn(name = "id_recette")
+    private List<Etapes> etapes = new ArrayList<>();
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    @JoinTable(name= "programmer",
+    @JoinTable(name = "programmer",
             joinColumns = @JoinColumn(name = "id_recette"),
             inverseJoinColumns = @JoinColumn(name = "id_calendrier"))
-    @JsonIgnoreProperties({"recette"})
-    private Set<CalendrierRecette> calendriers = new HashSet<CalendrierRecette>();
+    @JsonIgnoreProperties(value={"recettes","user"})
+    private Set<CalendrierRecette> calendriers = new HashSet<>();
 
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinTable(name = "contenir",
-            joinColumns = @JoinColumn(name = "id_ingredient"),
-            inverseJoinColumns = @JoinColumn(name = "id_recette"))
-    private List<Ingredient> ingredients = new ArrayList<Ingredient>();
+            joinColumns = @JoinColumn(name = "id_recette"),
+            inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
+    private List<Ingredient> ingredients = new ArrayList<>();
 
 }

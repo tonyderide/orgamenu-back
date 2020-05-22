@@ -1,13 +1,10 @@
 package fr.simplon.orgamenu.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -24,16 +21,16 @@ public class Ingredient {
     private Long idIngredient;
     private int quantity;
     private String nomIngredient;
-    private String Type;
-    private LocalDate peremption;
+    private int allergene;
+    private int Type;
+//    private LocalDate peremption;
 //    private int calorie;
-
 
 
     @ManyToMany
     @JoinTable(name = "contenir",
-            joinColumns = @JoinColumn(name = "id_recette"),
-            inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
+            joinColumns = @JoinColumn(name = "id_ingredient"),
+            inverseJoinColumns = @JoinColumn(name = "id_recette"))
     @JsonIgnore
     private List<Recette> recettes = new ArrayList<>();
 }

@@ -5,7 +5,6 @@ import fr.simplon.orgamenu.exceptions.UserNotFoundExceptions;
 import fr.simplon.orgamenu.models.User;
 import fr.simplon.orgamenu.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,23 +28,25 @@ public class UserController {
         if (user.isPresent()) {
             System.out.println(user);
             return user;
-        } throw new UserNotFoundExceptions();
+        }
+        throw new UserNotFoundExceptions();
     }
 
     @GetMapping("/")
-    public List<User> getAll(){
+    public List<User> getAll() {
         return userService.findAll();
     }
 
     @GetMapping("/{id}")
 //    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public Optional<User> getUserById(@PathVariable int id) throws UserNotFoundExceptions {
-        System.out.println(id+"usercontroller");
+        System.out.println(id + "usercontroller");
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             System.out.println(user);
             return user;
-        } throw new UserNotFoundExceptions();
+        }
+        throw new UserNotFoundExceptions();
     }
 }
 

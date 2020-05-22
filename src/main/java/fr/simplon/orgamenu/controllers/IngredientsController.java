@@ -18,10 +18,10 @@
 //    @Autowired
 //    IngredientsService ingredientsService;
 //
-////    @GetMapping("/")
-////    public Optional<Set<Ingredient>> findById(@RequestBody Set<CalendrierRecette> calendriers) throws Exception {
-////        Preconditions.checkNotNull(ingredientsService.findByUser(calendriers));
-////        return ingredientsService.findByUser(calendriers);
-////    }
+//    @GetMapping("/")
+//    public Optional<Set<Ingredient>> findById(@RequestBody Set<CalendrierRecette> calendriers) throws Exception {
+//        Preconditions.checkNotNull(ingredientsService.findByUser(calendriers));
+//        return ingredientsService.findByUser(calendriers);
+//    }
 //
 //}

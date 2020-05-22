@@ -38,51 +38,51 @@ public class CalendrierRecetteService {
     public Set<CalendrierRecette> findByUser() throws Exception {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<User> user = userRepository.findByUsername(username);
-        if (user.isPresent()){
+        if (user.isPresent()) {
             int id = user.get().getId();
             return calendrierRecetteRepository.findDateByIdUser(id);
-        }else{
+        } else {
             throw new Exception();
         }
     }
 
-    public CalendrierRecette create(int recetteId, CalendrierRecette calendrierRecette) {
-            //sauvegarde de la recette dans le calendrier courant
-            Optional<Recette> recette = recetteRepository.findById(recetteId);
-            Set<Recette> recettes = new HashSet<>();
-            if (recette.isPresent()) {
-                recettes.add(recette.get());
-                calendrierRecette.setRecettes(recettes);
-            }
-            //sauvegarde de l'utilisateur dans le calendrier courant
-            String username = SecurityContextHolder.getContext().getAuthentication().getName();
-            Optional<User> user = userRepository.findByUsername(username);
-            System.out.println(user.get().getId());
-            if (user.isPresent()) {
-                calendrierRecette.setUser(user.get());
-            }
+    public CalendrierRecette create(int recetteId, CalendrierRecette calendrierRecette) throws Exception {
+        //sauvegarde de la recette dans le calendrier courant
+        Optional<Recette> recette = recetteRepository.findById(recetteId);
+        Set<Recette> recettes = new HashSet<>();
+        if (recette.isPresent()) {
+            recettes.add(recette.get());
+            calendrierRecette.setRecettes(recettes);
+        }
+        //sauvegarde de l'utilisateur dans le calendrier courant
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            calendrierRecette.setUser(user.get());
             //sauvegarde de la recette
             return calendrierRecetteRepository.save(calendrierRecette);
+        }
+        throw new Exception();
 
     }
 
-    public void update(int idRecette,CalendrierRecette resource) {
-        calendrierRecetteRepository.updateById(idRecette,resource.getDate());
+    public void update(int idRecette, CalendrierRecette resource) {
+          calendrierRecetteRepository.updateById(idRecette, resource.getDate());
     }
 
     @Transactional
     public void deleteByDate(CalendrierRecette calendrier) {
-        LocalDate date= calendrier.getDate();
+        LocalDate date = calendrier.getDate();
         calendrierRecetteRepository.deleteByDate(date);
     }
 
     public Set<CalendrierRecette> findByDateAndUser(CalendrierRecette date) throws Exception {
-       String username = SecurityContextHolder.getContext().getAuthentication().getName();
-       Optional<User> user = userRepository.findByUsername(username);
-       if (user.isPresent()) {
-           return calendrierRecetteRepository.findByDatebyCurrentUser(date.getDate(),user.get());
-       }else
-           return calendrierRecetteRepository.findByDate(date.getDate());
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            return calendrierRecetteRepository.findByDatebyCurrentUser(date.getDate(), user.get());
+        } else
+            return calendrierRecetteRepository.findByDate(date.getDate());
 
 
     }

@@ -1,6 +1,6 @@
 package fr.simplon.orgamenu.security.services;
+
 import fr.simplon.orgamenu.models.ERole;
-import fr.simplon.orgamenu.repository.UserRepository;
 import fr.simplon.orgamenu.models.Role;
 import fr.simplon.orgamenu.models.User;
 import fr.simplon.orgamenu.payload.request.LoginRequest;
@@ -8,6 +8,7 @@ import fr.simplon.orgamenu.payload.request.SignupRequest;
 import fr.simplon.orgamenu.payload.response.JwtResponse;
 import fr.simplon.orgamenu.payload.response.MessageResponse;
 import fr.simplon.orgamenu.repository.RoleRepository;
+import fr.simplon.orgamenu.repository.UserRepository;
 import fr.simplon.orgamenu.security.jwt.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -18,7 +19,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 import java.util.HashSet;
 import java.util.List;
@@ -50,37 +50,35 @@ public class SignService {
 
     public ResponseEntity<?> signinService(LoginRequest loginRequest) {
 
-            Authentication authentication = this.authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        Authentication authentication = this.authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
 
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = this.jwtUtils.generateJwtToken(authentication);
 
+        HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("Token", jwt);
 
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            String jwt = this.jwtUtils.generateJwtToken(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
 
-            HttpHeaders responseHeaders = new HttpHeaders();
-            responseHeaders.set("Token",jwt);
-
-            UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-            List<String> roles = userDetails.getAuthorities().stream()
-                    .map(item -> item.getAuthority())
-                    .collect(Collectors.toList());
-
-            return ResponseEntity.ok()
-                    .headers(responseHeaders)
-                    .body(new JwtResponse(jwt,
-                    userDetails.getId(),
-                    userDetails.getUsername(),
-                    userDetails.getEmail(),
-                    userDetails.getFirstname(),
-                    userDetails.getLastname(),
-                    userDetails.getSize(),
-                    userDetails.getWeight(),
-                    userDetails.getAge(),
-                    userDetails.getSexe(),
-                    roles));
-                    //TODO juste pour les tests plus rapide Token dans le header
+        return ResponseEntity.ok()
+                .headers(responseHeaders)
+                .body(new JwtResponse(jwt,
+                        userDetails.getId(),
+                        userDetails.getUsername(),
+                        userDetails.getEmail(),
+                        userDetails.getFirstname(),
+                        userDetails.getLastname(),
+                        userDetails.getSize(),
+                        userDetails.getWeight(),
+                        userDetails.getAge(),
+                        userDetails.getSexe(),
+                        roles));
+        //TODO juste pour les tests plus rapide Token dans le header
 //            return ResponseEntity.ok(new JwtResponse(jwt,
 //                    userDetails.getId(),
 //                    userDetails.getUsername(),
@@ -92,8 +90,7 @@ public class SignService {
 //                    userDetails.getAge(),
 //                    userDetails.getSexe(),
 //                    roles));
-        }
-
+    }
 
 
     public ResponseEntity<?> signupService(SignupRequest signUpRequest) {

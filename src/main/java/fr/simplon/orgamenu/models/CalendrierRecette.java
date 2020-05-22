@@ -1,17 +1,12 @@
 package fr.simplon.orgamenu.models;
 
 
-import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateSerializer;
-
-
-import lombok.*;
-
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -37,10 +32,10 @@ public class CalendrierRecette {
     private LocalDate date;
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
-    @JoinTable(name= "programmer",
+    @JoinTable(name = "programmer",
             joinColumns = @JoinColumn(name = "id_calendrier"),
-            inverseJoinColumns = @JoinColumn(name = "id_recette" ))
-    @JsonIgnoreProperties(value = {"calendriers","users"})
+            inverseJoinColumns = @JoinColumn(name = "id_recette"))
+    @JsonIgnoreProperties(value = {"calendriers", "users"})
     private Set<Recette> recettes = new HashSet<Recette>();
 
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)

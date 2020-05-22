@@ -1,5 +1,6 @@
 package fr.simplon.orgamenu.models;
 
+
 import lombok.*;
 
 import javax.persistence.*;
@@ -13,13 +14,13 @@ import java.util.List;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-@Table(name="allergene")
+@Table(name = "allergene")
 public class Allergene {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idAllergene;
-    private String nomAllergene;
+    private int id;
+    private String name;
 
     @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
     @JoinTable(name = "concerner")

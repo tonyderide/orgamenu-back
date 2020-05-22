@@ -4,13 +4,10 @@ package fr.simplon.orgamenu.controllers;
 import com.google.common.base.Preconditions;
 import fr.simplon.orgamenu.models.CalendrierRecette;
 import fr.simplon.orgamenu.services.CalendrierRecetteService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -22,7 +19,6 @@ public class CalendrierRecetteController {
 
     @Autowired
     CalendrierRecetteService calendrierRecetteService;
-
 
 
     @GetMapping("/")
@@ -43,29 +39,24 @@ public class CalendrierRecetteController {
 
     @PostMapping("date/")
     public Set<CalendrierRecette> findByDate(@RequestBody CalendrierRecette date) throws Exception {
-        System.out.println(date.toString());
-        Preconditions.checkNotNull(calendrierRecetteService.findByDateAndUser(date));
+        Preconditions.checkNotNull(date);
         return calendrierRecetteService.findByDateAndUser(date);
     }
 
-    @PostMapping(value="/{idRecette}")
+    @PostMapping(value = "/{idRecette}")
     @ResponseBody
     @ResponseStatus(HttpStatus.CREATED)
-    public CalendrierRecette create(@PathVariable("idRecette") Optional<Integer> idRecette, @RequestBody CalendrierRecette resource)throws Exception {
-        if (idRecette.isPresent()) {
-            Preconditions.checkNotNull(resource);
-            return calendrierRecetteService.create(idRecette.get(), resource);
-        }else{
-            throw new Exception();
-        }
+    public CalendrierRecette create(@PathVariable("idRecette") int idRecette, @RequestBody CalendrierRecette resource) throws Exception {
+        Preconditions.checkNotNull(resource);
+        return calendrierRecetteService.create(idRecette, resource);
     }
 
-    @PutMapping(value = "/{idRecette}")
+    @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public void update(@PathVariable("idRecette") int idRecette, @RequestBody CalendrierRecette resource) {
+    public Optional<CalendrierRecette> update(@RequestParam int id, @RequestBody CalendrierRecette resource) {
         Preconditions.checkNotNull(resource);
-        Preconditions.checkNotNull(calendrierRecetteService.findById(resource.getIdCalendrier()));
-        calendrierRecetteService.update(idRecette,resource);
+        calendrierRecetteService.update(id, resource);
+        return calendrierRecetteService.findById(id);
     }
 
     @DeleteMapping
@@ -79,7 +70,6 @@ public class CalendrierRecetteController {
     public void deleteInit() {
         calendrierRecetteService.deleteBeforeToday();
     }
-
 
 
 }
