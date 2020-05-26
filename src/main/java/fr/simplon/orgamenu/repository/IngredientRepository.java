@@ -15,7 +15,5 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
 
     @Query("select i from Ingredient i")
     List<Ingredient> findAll();
-
-//    @Query("select i from Ingredient i where i.recettes = :date")
-//    Set<Ingredient> findIngredientsByUserID();
+    
 }

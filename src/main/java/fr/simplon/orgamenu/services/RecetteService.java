@@ -88,20 +88,24 @@ public class RecetteService {
     //soustrait les recettes sans preferences
     public List<Recette> moinsPreference(List<Recette> recettes) throws Exception {
         List<PreferenceAliment>prefUser=preferenceService.findAllUser();
-        List<Recette>recetteRejected=new ArrayList<>();
+        Set<Recette>recetteSelected=new HashSet<>();
+        List<Recette> recettesFinal= new ArrayList<>();
         for (Recette recette: recettes) {
             List<Ingredient>ingredients=recette.getIngredients();
             for (Ingredient ingredient:ingredients) {
                 for (PreferenceAliment pref:prefUser) {
                     //si le type de l'ingredient different de la pref alim
-                    if (ingredient.getType() != pref.getIdPreferenceAliment()) {
-                        recetteRejected.add(recette);
+                    if (ingredient.getType() == pref.getIdPreferenceAliment()) {
+                        recetteSelected.add(recette);
+                        System.out.println("Moins preference=================>"+recette.getName());
                     }
                 }
             }
         }
-        recettes.removeAll(recetteRejected);
-        return recettes;
+        recettesFinal.addAll(recetteSelected);
+        return recettesFinal;
+//        recettes.removeAll(recetteSelected);
+//        return recettes;
     }
 
 }

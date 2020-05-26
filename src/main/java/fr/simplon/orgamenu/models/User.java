@@ -81,6 +81,13 @@ public class User {
     @JsonIgnoreProperties({"user", "recettes"})
     private Set<CalendrierRecette> calendriers = new HashSet<>();
 
+    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @JoinTable(name = "concerner",
+            joinColumns = @JoinColumn(name = "users_id"),
+            inverseJoinColumns = @JoinColumn(name = "allergene_id"))
+    @JsonIgnoreProperties("users")
+    private List<Allergene> allergenes = new ArrayList<>();
+
     public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password, @NotBlank String firstname, @NotBlank String lastname, @NotBlank int size, @NotBlank int weight, @NotBlank int age, @NotBlank String sexe) {
         this.username = username;
         this.email = email;
@@ -91,7 +98,6 @@ public class User {
         this.weight = weight;
         this.age = age;
         this.sexe = sexe;
-
     }
 
 

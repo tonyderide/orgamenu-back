@@ -17,23 +17,31 @@ INSERT INTO co.ingredient (id_ingredient,type, allergene, nom_ingredient, quanti
 INSERT INTO co.ingredient (id_ingredient,type, allergene, nom_ingredient, quantity)VALUES (2,8, 2, 'aubergine', 1);
 INSERT INTO co.ingredient (id_ingredient,type, allergene, nom_ingredient, quantity)VALUES (1,1, 1, 'paquet de feuilles de lasagnes', 1);
 
-INSERT INTO co.recette (calorie, image_url, name, temp_cuisson, temp_preparation)VALUES (150, '/assets/img/lasagne.jpg', 'Lasagne végétarienne', 60, 20);
-INSERT INTO co.recette (calorie, image_url, name, temp_cuisson, temp_preparation)VALUES (600, '/assets/img/hamburger.jpeg', 'Hamburger maison', 10, 10);
-INSERT INTO co.recette (calorie, image_url, name, temp_cuisson, temp_preparation)VALUES (100, '/assets/img/pates.jpeg', 'pate', 10, 1);
-INSERT INTO co.recette (calorie, image_url, name, temp_cuisson, temp_preparation)VALUES (200, '/assets/img/riz.jpeg', 'riz', 20, 2);
-INSERT INTO co.recette (calorie, image_url, name, temp_cuisson, temp_preparation)VALUES (300, '/assets/img/soupe.jpeg', 'soupe', 10, 3);
+INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (1, 150, '/assets/img/lasagne.jpg', 'Lasagne végétarienne', 60, 20);
+INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (2, 600, '/assets/img/hamburger.jpeg', 'Hamburger maison', 10, 10);
+INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (3, 100, '/assets/img/pates.jpeg', 'pate', 10, 1);
+INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (4, 200, '/assets/img/riz.jpeg', 'riz au légume', 20, 2);
+INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (5, 300, '/assets/img/soupe.jpeg', 'soupe de légume', 10, 3);
 
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 1);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 8);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 13);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 11);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 4);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 3);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 12);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 6);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 10);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 9);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 5);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 7);
 INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 2);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (2, 3);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (2, 4);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (4, 9);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (2, 5);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (3, 6);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 1);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (2, 9);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (2, 7);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (2, 6);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (3, 1);
 INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (4, 8);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (3, 7);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (5, 11);
-INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (5, 10);
+INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (5, 8);
 
 INSERT INTO co.etapes (id_etape, etape, numero,id_recette)VALUES (1, 'Préchauffez le four à 180°C.', 1, 1);
 INSERT INTO co.etapes (id_etape, etape, numero,id_recette)VALUES (2, 'Pelez et émincez l’ail et l’oignon. Épluchez tous les légumes et coupez-les en dés (vous pouvez également utiliser un mélange de légumes surgelés pour ratatouille).', 2, 1);

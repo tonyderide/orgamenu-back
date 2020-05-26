@@ -3,6 +3,7 @@ package fr.simplon.orgamenu.controllers;
 
 import fr.simplon.orgamenu.payload.request.LoginRequest;
 import fr.simplon.orgamenu.payload.request.SignupRequest;
+import fr.simplon.orgamenu.payload.request.UpdateRequest;
 import fr.simplon.orgamenu.repository.RoleRepository;
 import fr.simplon.orgamenu.repository.UserRepository;
 import fr.simplon.orgamenu.security.jwt.JwtUtils;
@@ -49,5 +50,10 @@ public class AuthController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return this.signService.signupService(signUpRequest);
 
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<?> updateUser(@RequestBody UpdateRequest updateRequest) {
+        return this.signService.updateService(updateRequest);
     }
 }

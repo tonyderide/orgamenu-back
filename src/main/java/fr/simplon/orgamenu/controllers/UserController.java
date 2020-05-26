@@ -5,6 +5,7 @@ import fr.simplon.orgamenu.exceptions.UserNotFoundExceptions;
 import fr.simplon.orgamenu.models.User;
 import fr.simplon.orgamenu.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,18 +22,15 @@ public class UserController {
     @GetMapping("username/{username}")
 //    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public Optional<User> getByUsername(@PathVariable String username) throws UserNotFoundExceptions {
-        System.out.println("--------------");
-        System.out.println(username);
-        System.out.println("--------------");
         Optional<User> user = userService.findByUsername(username);
         if (user.isPresent()) {
-            System.out.println(user);
             return user;
         }
         throw new UserNotFoundExceptions();
     }
 
     @GetMapping("/")
+    @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAll() {
         return userService.findAll();
     }
