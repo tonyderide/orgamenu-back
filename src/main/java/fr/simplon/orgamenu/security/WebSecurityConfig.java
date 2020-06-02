@@ -60,12 +60,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**","/api/recettes/**").permitAll()
                 .antMatchers("/h2-console/**").permitAll()
+                .antMatchers("/v2/api-docs", "/webjars/**", "/swagger-resources/**", "/configuration/**", "/swagger-ui.html/**").permitAll()
                 .antMatchers("/api/**").permitAll();
 //								.anyRequest().authenticated();
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
         http.headers().frameOptions().disable();
     }
-
+    
 
 }

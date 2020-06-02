@@ -70,13 +70,13 @@ public class CalendrierRecetteService {
           calendrierRecetteRepository.updateById(idRecette, resource.getDate());
     }
 
-    @Transactional
-    public void deleteByDate(CalendrierRecette calendrier) {
-        LocalDate date = calendrier.getDate();
-        calendrierRecetteRepository.deleteByDate(date);
-    }
+//    @Transactional
+//    public void deleteByDate(CalendrierRecette calendrier) {
+//        LocalDate date = calendrier.getDate();
+//        calendrierRecetteRepository.deleteByDate(date);
+//    }
 
-    public Set<CalendrierRecette> findByDateAndUser(CalendrierRecette date) throws Exception {
+    public Set<CalendrierRecette> findByDateAndUser(CalendrierRecette date) {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Optional<User> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
@@ -89,7 +89,10 @@ public class CalendrierRecetteService {
 
     public void deleteBeforeToday() {
         LocalDate date = LocalDate.now();
-        System.out.println(date);
         calendrierRecetteRepository.deleteByDateBefore(date);
+    }
+
+    public void deleteByDate(CalendrierRecette calendrier) {
+            calendrierRecetteRepository.deleteById(calendrier.getIdCalendrier());
     }
 }

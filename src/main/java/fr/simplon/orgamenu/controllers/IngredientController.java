@@ -33,4 +33,13 @@ public class IngredientController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<Ingredient>> findAllByUser(){
+        try{
+            return ResponseEntity.ok(ingredientService.findAllByUser());
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

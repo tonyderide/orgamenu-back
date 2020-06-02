@@ -39,4 +39,6 @@ public interface CalendrierRecetteRepository extends JpaRepository<CalendrierRec
 //    void deleteinit(LocalDate date);
     void deleteByDateBefore(LocalDate date);
 
+    @Transactional
+    void deleteByDateAndUser(LocalDate date,User user);
 }

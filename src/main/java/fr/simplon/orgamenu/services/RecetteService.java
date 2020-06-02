@@ -104,8 +104,5 @@ public class RecetteService {
         }
         recettesFinal.addAll(recetteSelected);
         return recettesFinal;
-//        recettes.removeAll(recetteSelected);
-//        return recettes;
     }
-
 }

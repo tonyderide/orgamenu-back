@@ -61,7 +61,7 @@ public class CalendrierRecetteController {
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
-    public void delete(@RequestBody CalendrierRecette date) {
+    public void delete(@RequestBody CalendrierRecette date) throws Exception {
         calendrierRecetteService.deleteByDate(date);
     }
 
