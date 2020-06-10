@@ -64,7 +64,7 @@ public class RecetteService {
 
     }
 
-
+    //Todo à ameliorer à refactorer
     //soustrait les recettes avec allergenes
     public List<Recette> moinsAllergene(List<Recette> recettes) throws Exception {
         List<Recette> recettesRejected = new ArrayList<>();
@@ -72,12 +72,10 @@ public class RecetteService {
         for (Allergene allergene : allergeneUsers) {
             for (Recette recette: recettes) {
                 for (Ingredient ingredient : recette.getIngredients()) {
-                    //si allergeneUser n'est pas un allergene de la recette
-                    if ((ingredient.getAllergene()!=allergene.getId())) {
-                        //je l'ajoute a la recette final j'ai la liste des recettes non voulu
-                        if(!recettesRejected.contains(recette)){
+                    //si allergeneUser est un allergene de la recette
+                    if ((ingredient.getAllergene()==allergene.getId())) {
+                        //je l'ajoute a la recette rejected
                             recettesRejected.add(recette);
-                        }
                     }
                 }
             }

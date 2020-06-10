@@ -17,7 +17,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     Boolean existsByEmail(String email);
 
-//    @Query("update User.preferenceAliments set User.preferenceAliments= where User.username = :username")
     User save(User user);
 
 

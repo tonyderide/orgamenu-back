@@ -35,8 +35,6 @@ public interface CalendrierRecetteRepository extends JpaRepository<CalendrierRec
 
     @Transactional
     @Modifying
-//    @Query("DELETE FROM CalendrierRecette WHERE CalendrierRecette.date <= :date ")
-//    void deleteinit(LocalDate date);
     void deleteByDateBefore(LocalDate date);
 
     @Transactional

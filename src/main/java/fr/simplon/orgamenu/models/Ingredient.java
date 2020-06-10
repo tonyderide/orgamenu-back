@@ -33,4 +33,13 @@ public class Ingredient {
             inverseJoinColumns = @JoinColumn(name = "id_recette"))
     @JsonIgnore
     private List<Recette> recettes = new ArrayList<>();
+
+    public void addQuantity(int quantity) {
+        this.quantity += quantity;
+    }
+
+    public Ingredient (Ingredient ingredient){
+        this.quantity=ingredient.quantity;
+        this.nomIngredient=ingredient.nomIngredient;
+    }
 }

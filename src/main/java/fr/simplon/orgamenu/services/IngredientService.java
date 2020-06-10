@@ -39,24 +39,18 @@ public class IngredientService {
             for (Recette recette:recettes) {
                 //rajoute les ingredients correspondant au recette
                 ingredients.addAll(recette.getIngredients());
-//                for (Ingredient ingredient:ingredients) {
-//                    System.out.println("=======>"+ ingredient.getQuantity());
-//                    if (!ingredients.contains(ingredient)){
-//                        finalingredients.add(ingredient);
-                Map<Long, Ingredient> i = new HashMap<>();
-                for (Ingredient ingredient : ingredients) {
-                    Ingredient ancienIngredient = i.put(ingredient.getIdIngredient(), ingredient);
-//                    if (ancienIngredient != null) {
-//                        ingredientToSave.setQuantity(ingredient.getQuantity() + ancienIngredient.getQuantity());
-                    if (i.get(ingredient.getIdIngredient()) != null) {
-                       Ingredient obj2 = i.get(ingredient.getIdIngredient());
-                        obj2.setQuantity(obj2.getQuantity()+ingredient.getQuantity());
-                        i.put(ingredient.getIdIngredient(), obj2);
-                    }
-                }
-                ingredients = new ArrayList<>(i.values());
             }
         }
+        Map<String, Ingredient> i = new HashMap<>();
+        for (Ingredient ingredient : ingredients) {
+            if (i.containsKey(ingredient.getNomIngredient())) {
+                i.get(ingredient.getNomIngredient()).addQuantity(ingredient.getQuantity());
+            }
+            else {
+                i.put(ingredient.getNomIngredient(), new Ingredient(ingredient));
+            }
+        }
+            finalIngredients = new ArrayList<>(i.values());
         return finalIngredients;
     }
 }
