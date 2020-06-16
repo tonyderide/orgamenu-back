@@ -16,10 +16,22 @@ public class allergeneController {
     @Autowired
     AllergeneService allergeneService;
 
+    /**
+     * Get List of allergene by usercontextsecurity
+     * @return List<Allergene>
+     * @throws Exception
+     */
     @GetMapping("/")
     public List<Allergene> findAllergeneUser() throws Exception {
         return allergeneService.findAllergeneUser();
     }
+
+    /**
+     * create a list of allergene
+     * @param allergenes List<Allergene>
+     * @return List<Allergene>
+     * @throws Exception if there's no List<Allergene> in the body
+     */
     @PostMapping("/")
     public List<Allergene> create(@RequestBody List<Allergene> allergenes) throws Exception {
         return allergeneService.updateByUser(allergenes);

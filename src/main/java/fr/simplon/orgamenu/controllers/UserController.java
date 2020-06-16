@@ -19,8 +19,14 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    /**
+     * Get user By username as role user or admin
+     * @param username
+     * @return an User
+     * @throws UserNotFoundExceptions
+     */
     @GetMapping("username/{username}")
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public Optional<User> getByUsername(@PathVariable String username) throws UserNotFoundExceptions {
         Optional<User> user = userService.findByUsername(username);
         if (user.isPresent()) {
@@ -29,16 +35,25 @@ public class UserController {
         throw new UserNotFoundExceptions();
     }
 
+    /**
+     * Get all users as an admin
+     * @return a User
+     */
     @GetMapping("/")
     @PreAuthorize("hasRole('ADMIN')")
     public List<User> getAll() {
         return userService.findAll();
     }
 
+    /**
+     * Get user by id as role user or admin
+     * @param id
+     * @return a User
+     * @throws UserNotFoundExceptions
+     */
     @GetMapping("/{id}")
-//    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public Optional<User> getUserById(@PathVariable int id) throws UserNotFoundExceptions {
-        System.out.println(id + "usercontroller");
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             System.out.println(user);

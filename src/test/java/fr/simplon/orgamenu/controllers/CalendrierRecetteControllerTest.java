@@ -30,20 +30,5 @@ public class CalendrierRecetteControllerTest extends TestCase {
         when(calendrierRecetteService.findAll()).thenReturn(null);
         ResultActions response = this.mockMvc.perform(get("/api/calendrierrecettes/"));
         response.andExpect(status().isOk());
-        }
-
-    @Test
-    void create() {
-        fail();
-    }
-
-    @Test
-    void update() {
-        fail();
-    }
-
-    @Test
-    void delete() {
-        fail();
     }
 }

@@ -24,7 +24,7 @@ public class RecetteController {
 
 
     /**
-     * Récupere une liste de recette
+     * Get a list of all Recette
      *
      * @return une liste d'Objet recette
      */
@@ -37,7 +37,10 @@ public class RecetteController {
         }
     }
 
-
+    /**
+     * Get list of Recette selected by date in usercontext
+     * @return List of Recette
+     */
     @GetMapping("/datesuser")
     public ResponseEntity<List<Recette>> getAllByDateUser() {
         try {
@@ -49,8 +52,7 @@ public class RecetteController {
 
 
     /**
-     * Récupere une recette
-     *
+     * Get a recette by id
      * @param id Id d'une recette
      * @return un Objet recette
      */
@@ -64,8 +66,7 @@ public class RecetteController {
     }
 
     /**
-     * Crée une recette
-     *
+     * Create a recette
      * @param recette un objet Recette
      * @return Sauvegarde la recette en base
      */
@@ -77,7 +78,8 @@ public class RecetteController {
     }
 
     /**
-     * @param id Id d'une recette
+     * delete a recette
+     * @param id  d'une recette
      * @return Supprime une recette
      */
     @DeleteMapping("/{id}")
@@ -90,6 +92,5 @@ public class RecetteController {
         recetteService.deleteById(id);
         return ResponseEntity.ok().build();
     }
-
 
 }

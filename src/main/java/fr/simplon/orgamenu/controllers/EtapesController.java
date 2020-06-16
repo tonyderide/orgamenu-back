@@ -16,7 +16,12 @@ public class EtapesController {
 
     EtapesRepository etapesRepository;
 
-
+    /**
+     * get Etapes of a recette by id
+     * @param id Etapes
+     * @return Etapes
+     * @throws EtapeNotFoundExceptions
+     */
     @GetMapping("/{id}")
     public Etapes getEtapes(@PathVariable Long id) throws EtapeNotFoundExceptions {
         Optional<Etapes> etapes = etapesRepository.findById(id);

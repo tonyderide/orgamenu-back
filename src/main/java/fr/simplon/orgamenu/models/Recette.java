@@ -16,14 +16,12 @@ import java.util.Set;
 @Getter
 @Setter
 @RequiredArgsConstructor
-@NoArgsConstructor
 @ToString
 @EqualsAndHashCode
 @Table(name = "recette")
 public class Recette {
 
     @Id
-    @NonNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idRecette;
     private String name;

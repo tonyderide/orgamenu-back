@@ -9,7 +9,9 @@
           <factory-entry name="entityManagerFactory" value="3d4d19fc-d803-4a37-bee9-993a27456f82" />
           <factory-entry name="orgamenu" value="0a6a8a91-6a20-498b-8797-c661698ac626" />
         </datasource-mapping>
-        <naming-strategy-map />
+        <naming-strategy-map>
+          <unit-entry name="entityManagerFactory" />
+        </naming-strategy-map>
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">
@@ -22,6 +24,13 @@
           <root url="file://$MODULE_DIR$/src/main/java" />
           <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
+      </configuration>
+    </facet>
+    <facet type="javaeeApplication" name="javaEEApplication">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="application.xml" url="file://$MODULE_DIR$/META-INF/application.xml" />
+        </descriptors>
       </configuration>
     </facet>
   </component>

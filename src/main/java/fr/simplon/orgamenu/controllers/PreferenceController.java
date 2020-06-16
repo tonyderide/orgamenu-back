@@ -23,17 +23,32 @@ public class PreferenceController {
     @Autowired
     PreferenceService preferenceService;
 
-
+    /**
+     * Get all preference from a user
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/user")
     public List<PreferenceAliment> findallUser() throws Exception {
         return preferenceService.findAllUser();
     }
 
+    /**
+     * create preference for a user
+     * @param preference
+     * @return list of preference
+     * @throws Exception
+     */
     @PutMapping("/")
     public List<PreferenceAliment> create(@RequestBody List<PreferenceAliment> preference) throws Exception {
         return preferenceService.updateByUser(preference);
     }
 
+    /**
+     * find all preference
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/")
     public List<PreferenceAliment> findall() throws Exception {
         return preferenceService.findAllUser();

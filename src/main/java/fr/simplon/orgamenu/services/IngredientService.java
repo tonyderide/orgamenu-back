@@ -6,6 +6,7 @@ import fr.simplon.orgamenu.models.Ingredient;
 import fr.simplon.orgamenu.models.Recette;
 import fr.simplon.orgamenu.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -21,8 +22,12 @@ public class IngredientService {
     @Autowired
     IngredientRepository ingredientRepository;
 
+//    public List<Ingredient> findAll() {
+//        return ingredientRepository.findAll();
+//    }
     public List<Ingredient> findAll() {
-        return ingredientRepository.findAll();
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        return ingredientRepository.find(username);
     }
 
 

@@ -71,19 +71,6 @@ INSERT INTO co.allergene (id, name)VALUES (11, 'Soja');
 INSERT INTO co.allergene (id, name)VALUES (12, 'Lactose');
 INSERT INTO co.allergene (id, name)VALUES (13, 'Fruits à coque');
 
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (1, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (2, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (3, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (4, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (5, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (6, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (7, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (8, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (9, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (10, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (11, 1);
-INSERT INTO co.concerner (allergene_id, users_id) VALUES (12, 1);
-
 INSERT INTO co.preferencealiment (id_preference_aliment, nom_preference_aliment)VALUES (1, 'Pâte');
 INSERT INTO co.preferencealiment (id_preference_aliment, nom_preference_aliment)VALUES (2, 'Riz');
 INSERT INTO co.preferencealiment (id_preference_aliment, nom_preference_aliment)VALUES (3, 'Fromage');

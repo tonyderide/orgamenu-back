@@ -21,9 +21,8 @@ public class IngredientController {
     IngredientService ingredientService;
 
     /**
-     * Récupere une liste de recette
-     *
-     * @return une liste d'Objet recette
+     * Get a List of Ingredient
+     * @return List of Ingredient
      */
     @GetMapping("/")
     public ResponseEntity<List<Ingredient>> findAll() {
@@ -34,6 +33,10 @@ public class IngredientController {
         }
     }
 
+    /**
+     * Get all Ingredient by usercontext
+     * @return list Ingredient
+     */
     @GetMapping("/user")
     public ResponseEntity<List<Ingredient>> findAllByUser(){
         try{

@@ -40,18 +40,34 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    /**
+     * login in the application
+     * @param loginRequest Object LoginRequest
+     * @return a User details with token
+     */
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
         return this.signService.signinService(loginRequest);
 
     }
 
+    /**
+     * New user in the application
+     * @param signUpRequest Object SignupRequest
+     * @return
+     */
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         return this.signService.signupService(signUpRequest);
 
     }
 
+    /**
+     * Update a User (could use the signupRequest but if i dont want to update
+     * all parameter it will be more easy)
+     * @param updateRequest Object updateRequest
+     * @return
+     */
     @PutMapping("/update")
     public ResponseEntity<?> updateUser(@RequestBody UpdateRequest updateRequest) {
         return this.signService.updateService(updateRequest);
