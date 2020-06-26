@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class Etapes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEtape;
     private int numero;
     private String etape;

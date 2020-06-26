@@ -11,7 +11,5 @@ import java.util.List;
 
 @Repository
 public interface RecetteRepository extends JpaRepository<Recette, Integer> {
-
     List<Recette> findRecetteByCalendriers(@Param("i") CalendrierRecette i);
-
 }

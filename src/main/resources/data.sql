@@ -17,11 +17,11 @@ INSERT INTO co.ingredient (id_ingredient,type, allergene, nom_ingredient, quanti
 INSERT INTO co.ingredient (id_ingredient,type, allergene, nom_ingredient, quantity)VALUES (2,8, 2, 'aubergine', 1);
 INSERT INTO co.ingredient (id_ingredient,type, allergene, nom_ingredient, quantity)VALUES (1,1, 1, 'paquet de feuilles de lasagnes', 1);
 
-INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (1, 150, '/assets/img/lasagne.jpg', 'Lasagne végétarienne', 60, 20);
-INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (2, 600, '/assets/img/hamburger.jpeg', 'Hamburger maison', 10, 10);
-INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (3, 100, '/assets/img/pates.jpeg', 'pate', 10, 1);
-INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (4, 200, '/assets/img/riz.jpeg', 'riz au légume', 20, 2);
-INSERT INTO co.recette (id_recette, calorie, image_url, name, temp_cuisson, temp_preparation) VALUES (5, 300, '/assets/img/soupe.jpeg', 'soupe de légume', 10, 3);
+INSERT INTO co.recette ( calorie, image_url, name, temp_cuisson, temp_preparation) VALUES ( 150, '/assets/img/lasagne.jpg', 'Lasagne végétarienne', 60, 20);
+INSERT INTO co.recette ( calorie, image_url, name, temp_cuisson, temp_preparation) VALUES ( 600, '/assets/img/hamburger.jpeg', 'Hamburger maison', 10, 10);
+INSERT INTO co.recette ( calorie, image_url, name, temp_cuisson, temp_preparation) VALUES ( 100, '/assets/img/pates.jpeg', 'Pates', 10, 1);
+INSERT INTO co.recette ( calorie, image_url, name, temp_cuisson, temp_preparation) VALUES ( 200, '/assets/img/riz.jpeg', 'Riz aux légumes', 20, 2);
+INSERT INTO co.recette ( calorie, image_url, name, temp_cuisson, temp_preparation) VALUES ( 300, '/assets/img/soupe.jpeg', 'Soupe de légumes', 10, 3);
 
 INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 8);
 INSERT INTO co.contenir (id_recette, id_ingredient) VALUES (1, 13);
@@ -117,3 +117,6 @@ INSERT INTO co.fournir (user_id, preferencealiment_id)VALUES (1, 2);
 INSERT INTO co.fournir (user_id, preferencealiment_id)VALUES (1, 3);
 INSERT INTO co.fournir (user_id, preferencealiment_id)VALUES (2, 1);
 INSERT INTO co.fournir (user_id, preferencealiment_id)VALUES (2, 4);
+
+ALTER SEQUENCE co.ingredient_id_ingredient_seq RESTART WITH 14;
+ALTER SEQUENCE co.etapes_id_etape_seq RESTART WITH 14;

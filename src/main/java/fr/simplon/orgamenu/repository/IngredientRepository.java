@@ -35,10 +35,5 @@ public interface IngredientRepository extends JpaRepository<Ingredient, Integer>
             "    join co.users on co.calendrier.user_id = co.users.id\n" +
             "where username=?1",nativeQuery=true)
     List<Ingredient> find(String username);
-
-//    @Query("SELECT i FROM  Ingredient i " +
-//            "join Recette.ingredients ri ON Ingredient.idIngredient= ri.idIngredient " +
-//            "where Recette.idRecette =1"
-//            )
-//List<Ingredient> find(String username);
+    ;
 }

@@ -35,7 +35,8 @@ public class RecetteService {
     }
 
     public Recette save(Recette recette) {
-        return recetteRepository.save(recette);
+        System.out.println(recette.getIngredients().toString());
+        return recetteRepository.saveAndFlush(recette);
     }
 
     public Optional<Recette> findById(int id) {

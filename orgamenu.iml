@@ -12,6 +12,7 @@
         <naming-strategy-map>
           <unit-entry name="entityManagerFactory" />
         </naming-strategy-map>
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/META-INF/persistence.xml" />
       </configuration>
     </facet>
     <facet type="Spring" name="Spring">

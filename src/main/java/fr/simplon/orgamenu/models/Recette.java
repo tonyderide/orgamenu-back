@@ -38,7 +38,8 @@ public class Recette {
     @JsonIgnoreProperties("recettes")
     private Set<User> users = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST,
+                          CascadeType.MERGE})
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "id_recette")
     private List<Etapes> etapes = new ArrayList<>();
@@ -51,7 +52,10 @@ public class Recette {
     private Set<CalendrierRecette> calendriers = new HashSet<>();
 
 
-    @ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    }, fetch = FetchType.LAZY)
     @JoinTable(name = "contenir",
             joinColumns = @JoinColumn(name = "id_recette"),
             inverseJoinColumns = @JoinColumn(name = "id_ingredient"))
